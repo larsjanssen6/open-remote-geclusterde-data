@@ -6,7 +6,7 @@ Hoofdvraag:
 
 Deze repository is een bewijslast voor het opzetten van een demo project waarbij data 
 geclusterd wordt weergegeven. Voor dit project was het onduidelijk over hoe
-dit weergegeven kon worden. In deze demo wordt succesvol aangetoond dat het mogelijk
+dit geimplementeerd kon worden. In deze demo wordt succesvol aangetoond dat het mogelijk
 is met mapbox. 
 
 <strong>Zodra het project is opgezet ziet het er als volgt uit:</strong>
