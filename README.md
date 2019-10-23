@@ -1,6 +1,6 @@
 # Prototype DEMO open remote geclusterde data
 
-Hoofdvraag (waarom deze repository?):
+Hoofdvraag:
 
 <strong>Hoe toon ik een geclusterde data set met mapbox?</strong>
 
