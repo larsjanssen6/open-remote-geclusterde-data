@@ -11,8 +11,13 @@ is met mapbox.
 
 <strong>Zodra het project is opgezet ziet het er als volgt uit:</strong>
 
+<strong>Overzicht</strong>
 ![myimage-alt-tag](https://github.com/larsjanssen6/open-remote-geclusterde-data/blob/master/public/demo/one.png)
+
+<strong>Geclusterde data</strong>
 ![myimage-alt-tag](https://github.com/larsjanssen6/open-remote-geclusterde-data/blob/master/public/demo/two.png)
+
+<strong>Geclusterde data ingezoomd</strong>
 ![myimage-alt-tag](https://github.com/larsjanssen6/open-remote-geclusterde-data/blob/master/public/demo/three.png)
 
 
