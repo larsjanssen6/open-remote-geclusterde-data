@@ -21,7 +21,7 @@
 
         mounted() {
             mapboxgl.accessToken =
-                'pk.eyJ1IjoibGFyc2phbnNzZW4iLCJhIjoiY2pleXNmajIwMWdhbzJ6bnZjajZmeWYxeiJ9.tJqNmSSzbmhwPIO3qEkaGg';
+                'asdf';
 
             this.map = new mapboxgl.Map({
                 container: 'map',
