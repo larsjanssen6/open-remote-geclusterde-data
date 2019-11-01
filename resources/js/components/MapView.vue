@@ -16,16 +16,23 @@
                 markers: [],
                 clustersGeojson: {},
                 clusterIndex: null,
+                colors: [
+                    '#ffb3b3',
+                    '#ff4d4d',
+                    '#ff0000',
+                    '#b30000',
+                    '#660000'
+                ]
             };
         },
 
         mounted() {
             mapboxgl.accessToken =
-                'asdf';
+                'pk.eyJ1Ijoic3RlZmFuZ2llcyIsImEiOiJjazBlemc3MmkwZTNkM25tcHIwZW9nOGJvIn0.TuLSLNJrtb247NH3MXWVJA';
 
             this.map = new mapboxgl.Map({
                 container: 'map',
-                style: 'mapbox://styles/larsjanssen/ck04xvspq00gu1cpjwul2g8sr',
+                style: 'mapbox://styles/stefangies/ck1gcr5ek012w1clg21fznkc5',
                 zoom: 16,
                 center: [5.469722, 51.441643],
             });
@@ -60,7 +67,7 @@
 
             addMarkers() {
                 this.clusterIndex = new Supercluster({
-                    radius: 120,
+                    radius: 100,
                     maxZoom: 16
                 });
 
@@ -124,11 +131,15 @@
                         var leaf = this.clusterIndex.getLeaves(feature.properties.cluster_id)[0];
                         $feature = document.createElement('div');
                         $feature.className =
-                            'flex items-center justify-center w-16 h-16 rounded-full relative overflow-hidden shadow text-center text-lg text-white font-bold bg-cover cursor-pointer bg-center';
+                            'flex items-center justify-center w-16 h-16 rounded-full relative overflow-hidden text-center text-lg text-white font-bold bg-cover cursor-pointer bg-center';
                         $feature.style.backgroundImage = `url(${leaf.properties.image})`;
 
                         var $innerBackground = document.createElement('div');
-                        $innerBackground.className = 'absolute bg-black opacity-25 w-full h-full';
+                        $innerBackground.className = 'absolute w-full h-full';
+                        const color = this.bindColor((feature.properties.point_count / this.locations.features.length).toFixed(2))
+                        $innerBackground.style.backgroundColor = color;
+
+
 
                         var $innerText = document.createElement('div');
                         $innerText.className = 'absolute';
@@ -144,7 +155,7 @@
                     } else {
                         $feature = document.createElement('div');
                         $feature.className =
-                            'flex items-center justify-center w-16 h-16 rounded-full text-center text-lg text-white font-bold shadow-lg bg-cover cursor-pointer bg-center';
+                            'flex items-center justify-center w-10 h-10 rounded-full text-center text-lg text-white font-bold bg-cover cursor-pointer bg-center';
                         $feature.style.backgroundImage = `url(${feature.properties.image})`;
                         this.bindClickEvent($feature, feature);
 
@@ -205,6 +216,21 @@
                     this.map.fitBounds(bounds, { padding: 100 });
                 });
             },
+
+            bindColor(index) {
+                switch (true) {
+                    case (index < 0.2):
+                        return this.colors[0];
+                    case (index < 0.4):
+                        return this.colors[1];
+                    case (index < 0.6):
+                        return this.colors[2];
+                    case (index < 0.8):
+                        return this.colors[3];
+                    case (index < 1.0):
+                        return this.colors[4];
+                }
+            }
         },
     };
 </script>
