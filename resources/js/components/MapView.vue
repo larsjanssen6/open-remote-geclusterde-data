@@ -1,17 +1,26 @@
 <template>
-    <div class="rounded w-full h-full" id="map"></div>
+    <div class="relative w-full h-full">
+        <div class="absolute w-full h-full">
+            <div class="rounded w-full h-full" id="map"></div>
+        </div>
+
+        <div class="absolute mt-4 px-4 w-full">
+            <time-line></time-line>
+        </div>
+    </div>
 </template>
 
 <script>
+    import moment from 'moment';
     import mapboxgl from 'mapbox-gl';
     import Supercluster from 'supercluster';
-    import MapboxDraw from '@mapbox/mapbox-gl-draw';
 
     export default {
         data() {
             return {
                 map: null,
                 locations: [],
+                allLocations: { features: [], type: "FeatureCollection" },
                 clusters: [],
                 markers: [],
                 clustersGeojson: {},
@@ -42,27 +51,34 @@
             this.map.on('load', () => {
                 this.addMarkers();
             });
+
+            Bus.$on('reload-map', (range) => {
+                this.reloadMap(range);
+            });
         },
 
         created() {
             axios.get('/map').then(({ data }) => {
                 this.locations = data;
+                this.allLocations = this.locations;
             });
-
-            var draw = new MapboxDraw({
-                displayControlsDefault: false,
-                controls: {
-                    polygon: true,
-                    trash: true
-                }
-            });
-
-            this.map.addControl(draw);
         },
 
         methods: {
-            toggle() {
-                alert('df');
+            reloadMap(range) {
+                this.allLocations = { features: [], type: "FeatureCollection" };
+
+                this.locations.features.forEach((f) => {
+                    let time = (moment(f.properties.aangemaakt).minutes() + moment(f.properties.aangemaakt).hours() * 60);
+
+                    console.log(time + " " + range);
+
+                    if(time == range) {
+                        this.allLocations.features.push(f);
+                    }
+                });
+
+                this.addMarkers();
             },
 
             addMarkers() {
@@ -71,7 +87,7 @@
                     maxZoom: 16
                 });
 
-                this.clusterIndex.load(this.locations.features);
+                this.clusterIndex.load(this.allLocations.features);
                 this.map.on('moveend', () => {
                     this.moveEnd();
                 });
@@ -80,6 +96,7 @@
             },
 
             updateClusters() {
+                console.log('UPDATE CLUSTERS');
                 var bounds = this.map.getBounds(),
                     zoom = this.map.getZoom();
 
@@ -136,7 +153,7 @@
 
                         var $innerBackground = document.createElement('div');
                         $innerBackground.className = 'absolute w-full h-full';
-                        const color = this.bindColor((feature.properties.point_count / this.locations.features.length).toFixed(2))
+                        const color = this.bindColor((feature.properties.point_count / this.allLocations.features.length).toFixed(2))
                         $innerBackground.style.backgroundColor = color;
 
 

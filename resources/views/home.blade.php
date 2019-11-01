@@ -24,12 +24,8 @@
                 <filter-view></filter-view>
             </div>
 
-            <div class="flex items-center justify-center w-full rounded bg-gray-500 text-white py-2">
-                Tijdlijn
-            </div>
-
             <div class="h-full py-4">
-                <map-view></map-view>
+                <map-view class="mt-4"></map-view>
             </div>
         </div>
     </div>

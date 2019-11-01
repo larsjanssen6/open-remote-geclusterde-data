@@ -2,7 +2,7 @@
     <div class="z-10">
         <dropdown button-text="Color Levels" class="z-0">
             <div class="right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl cursor-pointer">
-                <a v-for="color in colors" class="block px-4 py-2 text-gray-800 hover:text-white" :style="background-color: {{color}}">
+                <a v-for="color in colors" class="block px-4 py-2 text-gray-800 hover:text-white">
                     {{color}}
                 </a>
             </div>
