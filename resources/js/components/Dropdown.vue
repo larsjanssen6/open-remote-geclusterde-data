@@ -2,10 +2,10 @@
     <div>
         <button
             @click="toggle"
-            class="bg-default-100 hover:bg-blue-400 text-black font-bold py-2 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded w-40 cursor-pointer"
+            class="bg-blue-800 hover:bg-blue-700 text-white py-2 pl-3 pr-2 rounded inline-flex items-center cursor-pointer border-0"
         >
-            <slot name="icon"></slot>
-            {{ buttonText }}
+            <span>{{ buttonText }}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-2 h-2 pl-2" viewBox="0 0 24 24"><path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z"/></svg>
         </button>
         <div v-show="active" ref="dropdown" class="z-50">
             <slot></slot>

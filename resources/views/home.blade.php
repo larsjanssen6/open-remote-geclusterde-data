@@ -14,18 +14,18 @@
 <body class="font-sans">
 <div id="app">
     <div class="flex h-screen w-full">
-        <div class="flex items-center justify-center bg-gray-500 rounded text-white w-64">
+        <div class="flex items-center justify-center bg-blue-900 text-white w-32">
             <h2 class="text-2xl">MENU</h2>
         </div>
 
-        <div class="flex flex-col w-full px-2">
+        <div class="flex flex-col w-full">
 
-            <div class="flex justify-start items-center bg-gray-500 rounded text-white h-16 w-full px-2">
+            <div class="flex justify-start items-center text-white h-12 w-full">
                 <filter-view></filter-view>
             </div>
 
-            <div class="h-full py-4">
-                <map-view class="mt-4"></map-view>
+            <div class="h-full">
+                <map-view></map-view>
             </div>
         </div>
     </div>

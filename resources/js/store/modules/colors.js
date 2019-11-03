@@ -16,7 +16,9 @@ const getters = {
 
 const mutations = {
     SET_COLOR: (state, oldValue, newValue) => {
+        this.state.filter(x => {
 
+        })
     }
 };
 

@@ -1966,6 +1966,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -1974,7 +1976,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('colors', {
     colors: 'colors'
-  }))
+  })),
+  methods: {
+    showColorPicker: function showColorPicker(color) {
+      var elem = this.$refs[color];
+      elem[0].click();
+    }
+  }
 });
 
 /***/ }),
@@ -55846,14 +55854,28 @@ var render = function() {
       "button",
       {
         staticClass:
-          "bg-default-100 hover:bg-blue-400 text-black font-bold py-2 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded w-40 cursor-pointer",
+          "bg-blue-800 hover:bg-blue-700 text-white py-2 pl-3 pr-2 rounded inline-flex items-center cursor-pointer border-0",
         on: { click: _vm.toggle }
       },
       [
-        _vm._t("icon"),
-        _vm._v("\n        " + _vm._s(_vm.buttonText) + "\n    ")
-      ],
-      2
+        _c("span", [_vm._v(_vm._s(_vm.buttonText))]),
+        _vm._v(" "),
+        _c(
+          "svg",
+          {
+            staticClass: "fill-current w-2 h-2 pl-2",
+            attrs: { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 24 24" }
+          },
+          [
+            _c("path", {
+              attrs: {
+                d:
+                  "M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z"
+              }
+            })
+          ]
+        )
+      ]
     ),
     _vm._v(" "),
     _c(
@@ -55899,7 +55921,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "z-10" },
+    { staticClass: "z-10 ml-2" },
     [
       _c(
         "dropdown",
@@ -55908,19 +55930,35 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass:
-                "right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl cursor-pointer"
+              staticClass: "right-0 mt-1 bg-black w-48 shadow-xl cursor-pointer"
             },
-            _vm._l(_vm.colors, function(color) {
+            _vm._l(_vm.colors, function(color, index) {
               return _c(
                 "a",
                 {
-                  staticClass: "block px-4 py-2 text-gray-800 hover:text-white"
+                  staticClass: "block px-2 py-2 text-white hover:opacity-75",
+                  style: { "background-color": color },
+                  on: {
+                    click: function($event) {
+                      return _vm.showColorPicker(color)
+                    }
+                  }
                 },
                 [
                   _vm._v(
-                    "\n                " + _vm._s(color) + "\n            "
-                  )
+                    "\n                Kleur " +
+                      _vm._s(index + 1) +
+                      ": " +
+                      _vm._s(color) +
+                      "\n\n                "
+                  ),
+                  _c("input", {
+                    ref: color,
+                    refInFor: true,
+                    staticClass: "hidden",
+                    attrs: { type: "color" },
+                    domProps: { value: color }
+                  })
                 ]
               )
             }),
@@ -55959,7 +55997,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "absolute mt-4 px-4 w-full" },
+      { staticClass: "absolute mt-4 w-full mx-0" },
       [_c("time-line")],
       1
     )
@@ -55996,7 +56034,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "mx-10" }, [
     _c("div", { staticClass: "relative" }, [
       _c("input", {
         directives: [
@@ -56007,7 +56045,7 @@ var render = function() {
             expression: "range"
           }
         ],
-        staticClass: "slider",
+        staticClass: "slider m-0",
         attrs: {
           type: "range",
           min: "1",
@@ -69779,6 +69817,8 @@ var debug = "development" !== 'production';
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+var _this = undefined;
+
 var state = {
   colors: ['#ffb3b3', '#ff4d4d', '#ff0000', '#b30000', '#660000']
 };
@@ -69788,7 +69828,9 @@ var getters = {
   }
 };
 var mutations = {
-  SET_COLOR: function SET_COLOR(state, oldValue, newValue) {}
+  SET_COLOR: function SET_COLOR(state, oldValue, newValue) {
+    _this.state.filter(function (x) {});
+  }
 };
 var actions = {
   changeColor: function changeColor(_ref, oldValue, newValue) {

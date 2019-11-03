@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mx-10">
         <div class="relative">
             <input
                     type="range"
@@ -7,7 +7,7 @@
                     max="1440"
                     value="0"
                     v-model="range"
-                    class="slider"
+                    class="slider m-0"
                     id="slider">
         </div>
 
