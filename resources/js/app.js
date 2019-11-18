@@ -4,12 +4,19 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 import store from './store'
+import VueApexCharts from "vue-apexcharts";
 
 window.Vue = require('vue');
 
 window.Bus = new Vue();
+
+Vue.use(VueApexCharts);
+
+Vue.component('apexchart', VueApexCharts)
+
 
 /**
  * The following block of code may be used to automatically register your
