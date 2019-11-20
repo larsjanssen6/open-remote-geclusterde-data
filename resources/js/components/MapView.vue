@@ -68,17 +68,18 @@
             reloadMap(range) {
                 this.allLocations = {features: [], type: "FeatureCollection"};
 
-                this.locations.features.forEach((f) => {
-                    let time = (moment(f.properties.aangemaakt).minutes() + moment(f.properties.aangemaakt).hours() * 60);
+                if(this.locations.features) {
+                    this.locations.features.forEach((f) => {
+                        let time = moment(f.properties.aangemaakt).hours();
 
-                    console.log(time + " " + range);
+                        if (time == range) {
+                            console.log('match');
+                            this.allLocations.features.push(f);
+                        }
+                    });
 
-                    if (time == range) {
-                        this.allLocations.features.push(f);
-                    }
-                });
-
-                this.addMarkers();
+                    this.addMarkers();
+                }
             },
 
             addMarkers() {
@@ -88,6 +89,7 @@
                 });
 
                 this.clusterIndex.load(this.allLocations.features);
+
                 this.map.on('moveend', () => {
                     this.moveEnd();
                 });
@@ -96,7 +98,6 @@
             },
 
             updateClusters() {
-                console.log('UPDATE CLUSTERS');
                 var bounds = this.map.getBounds(),
                     zoom = this.map.getZoom();
 

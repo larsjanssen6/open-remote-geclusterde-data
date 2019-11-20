@@ -5,7 +5,7 @@
             <input
                     type="range"
                     min="1"
-                    max="1440"
+                    max="24"
                     value="0"
                     v-model="range"
                     class="slider m-0"
@@ -69,7 +69,7 @@
 
         mounted() {
             let d = new Date();
-            this.range = d.getHours() *60;
+            this.range = d.getHours();
         },
 
         watch: {

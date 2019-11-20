@@ -2086,15 +2086,19 @@ __webpack_require__.r(__webpack_exports__);
         features: [],
         type: "FeatureCollection"
       };
-      this.locations.features.forEach(function (f) {
-        var time = moment__WEBPACK_IMPORTED_MODULE_0___default()(f.properties.aangemaakt).minutes() + moment__WEBPACK_IMPORTED_MODULE_0___default()(f.properties.aangemaakt).hours() * 60;
-        console.log(time + " " + range);
 
-        if (time == range) {
-          _this3.allLocations.features.push(f);
-        }
-      });
-      this.addMarkers();
+      if (this.locations.features) {
+        this.locations.features.forEach(function (f) {
+          var time = moment__WEBPACK_IMPORTED_MODULE_0___default()(f.properties.aangemaakt).hours();
+
+          if (time == range) {
+            console.log('match');
+
+            _this3.allLocations.features.push(f);
+          }
+        });
+        this.addMarkers();
+      }
     },
     addMarkers: function addMarkers() {
       var _this4 = this;
@@ -2110,7 +2114,6 @@ __webpack_require__.r(__webpack_exports__);
       this.updateClusters();
     },
     updateClusters: function updateClusters() {
-      console.log('UPDATE CLUSTERS');
       var bounds = this.map.getBounds(),
           zoom = this.map.getZoom();
       this.clustersGeojson = this.clusterIndex.getClusters([bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()], Math.floor(zoom));
@@ -2318,7 +2321,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var d = new Date();
-    this.range = d.getHours() * 60;
+    this.range = d.getHours();
   },
   watch: {
     range: function range() {
@@ -56383,7 +56386,7 @@ var render = function() {
           attrs: {
             type: "range",
             min: "1",
-            max: "1440",
+            max: "24",
             value: "0",
             id: "slider"
           },
@@ -70248,8 +70251,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/stefangies/Documents/OI7/Projects/open-remote-geclusterde-data/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/stefangies/Documents/OI7/Projects/open-remote-geclusterde-data/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/lars/Documents/persoonlijk/code/open-remote-maps/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/lars/Documents/persoonlijk/code/open-remote-maps/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
