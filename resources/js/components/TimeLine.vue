@@ -1,6 +1,6 @@
 <template>
     <div class="mx-10">
-        <apexchart width="100%" height="125" type="bar" :options="chartOptions" :series="series"></apexchart>
+        <apexchart width="100%" height="40" type="bar" :options="chartOptions" :series="series"></apexchart>
         <div class="relative">
             <input
                     type="range"
@@ -32,6 +32,11 @@
                         },
                         sparkline: {
                             enabled: true
+                        },
+                        events: {
+                            dataPointSelection: function(event, chartContext, config) {
+                                console.log(config.dataPointIndex);
+                            }
                         }
                     },
                     xaxis: {

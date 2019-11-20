@@ -155,7 +155,11 @@
                         var $innerBackground = document.createElement('div');
                         $innerBackground.className = 'absolute w-full h-full';
                         const color = this.bindColor((feature.properties.point_count / this.allLocations.features.length).toFixed(2))
-                        $innerBackground.style.backgroundColor = color;
+                        if (color === undefined) {
+                            $innerBackground.style.backgroundColor = this.colors[4];
+                        } else {
+                            $innerBackground.style.backgroundColor = color;
+                        }
 
 
                         var $innerText = document.createElement('div');
@@ -173,7 +177,7 @@
                         $feature = document.createElement('div');
                         $feature.className =
                             'flex items-center justify-center w-10 h-10 rounded-full text-center text-lg text-white font-bold bg-cover cursor-pointer bg-center';
-                        $feature.style.backgroundImage = `url(${feature.properties.image})`;
+                        $feature.style.backgroundImage = `url(person.svg)`;
                         this.bindClickEvent($feature, feature);
 
                         this.markers.push(
@@ -201,19 +205,13 @@
 
                 return `
                 <div class="flex items-center flex-col bg-white p-6">
-                    <h1>${feature.properties.name}</h1>
-                    <h3 class="font-semibold text-center mt-2">📍${feature.properties.place}</h3>
+                    <h1>Long: ${feature.geometry.coordinates[0]}</h1>
+                    <h1>Lat: ${feature.geometry.coordinates[0]}</h1>
 
                     <a  href="${profileRoute}"
                         target="_blank"
                         class="rounded font-bold bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 mt-4">
-                        Bekijk profiel
-                    </a>
-
-                    <a  href="${chatRoute}"
-                        target="_blank"
-                        class="text-primary underline mt-4">
-                        Chat met baasje
+                        Meer info
                     </a>
                 </div>
             `;

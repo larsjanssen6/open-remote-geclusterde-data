@@ -2163,7 +2163,12 @@ __webpack_require__.r(__webpack_exports__);
 
           var color = _this5.bindColor((feature.properties.point_count / _this5.allLocations.features.length).toFixed(2));
 
-          $innerBackground.style.backgroundColor = color;
+          if (color === undefined) {
+            $innerBackground.style.backgroundColor = _this5.colors[4];
+          } else {
+            $innerBackground.style.backgroundColor = color;
+          }
+
           var $innerText = document.createElement('div');
           $innerText.className = 'absolute';
           $innerText.innerHTML = feature.properties.point_count_abbreviated;
@@ -2176,7 +2181,7 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           $feature = document.createElement('div');
           $feature.className = 'flex items-center justify-center w-10 h-10 rounded-full text-center text-lg text-white font-bold bg-cover cursor-pointer bg-center';
-          $feature.style.backgroundImage = "url(".concat(feature.properties.image, ")");
+          $feature.style.backgroundImage = "url(person.svg)";
 
           _this5.bindClickEvent($feature, feature);
 
@@ -2200,7 +2205,7 @@ __webpack_require__.r(__webpack_exports__);
     popupHTML: function popupHTML(feature) {
       var profileRoute = '/';
       var chatRoute = '/';
-      return "\n            <div class=\"flex items-center flex-col bg-white p-6\">\n                <h1>".concat(feature.properties.name, "</h1>\n                <h3 class=\"font-semibold text-center mt-2\">\uD83D\uDCCD").concat(feature.properties.place, "</h3>\n\n                <a  href=\"").concat(profileRoute, "\"\n                    target=\"_blank\"\n                    class=\"rounded font-bold bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 mt-4\">\n                    Bekijk profiel\n                </a>\n\n                <a  href=\"").concat(chatRoute, "\"\n                    target=\"_blank\"\n                    class=\"text-primary underline mt-4\">\n                    Chat met baasje\n                </a>\n            </div>\n        ");
+      return "\n            <div class=\"flex items-center flex-col bg-white p-6\">\n                <h1>Long: ".concat(feature.geometry.coordinates[0], "</h1>\n                <h1>Lat: ").concat(feature.geometry.coordinates[0], "</h1>\n\n                <a  href=\"").concat(profileRoute, "\"\n                    target=\"_blank\"\n                    class=\"rounded font-bold bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 mt-4\">\n                    Meer info\n                </a>\n            </div>\n        ");
     },
     bindClusterClickEvent: function bindClusterClickEvent(el, feature) {
       var _this7 = this;
@@ -2285,6 +2290,11 @@ __webpack_require__.r(__webpack_exports__);
           },
           sparkline: {
             enabled: true
+          },
+          events: {
+            dataPointSelection: function dataPointSelection(event, chartContext, config) {
+              console.log(config.dataPointIndex);
+            }
           }
         },
         xaxis: {
@@ -56370,7 +56380,7 @@ var render = function() {
       _c("apexchart", {
         attrs: {
           width: "100%",
-          height: "125",
+          height: "40",
           type: "bar",
           options: _vm.chartOptions,
           series: _vm.series
