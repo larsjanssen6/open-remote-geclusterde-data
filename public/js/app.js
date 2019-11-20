@@ -2268,6 +2268,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2325,6 +2329,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     range: function range() {
+      console.log(this.range);
       Bus.$emit('reload-map', this.range);
     }
   }
@@ -56388,6 +56393,7 @@ var render = function() {
             min: "1",
             max: "24",
             value: "0",
+            step: "1",
             id: "slider"
           },
           domProps: { value: _vm.range },
@@ -56396,7 +56402,18 @@ var render = function() {
               _vm.range = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "range-labels" },
+          _vm._l(24, function(index) {
+            return _c("li", { key: index - 1 }, [
+              _vm._v(_vm._s(index - 1 + ":00"))
+            ])
+          }),
+          0
+        )
       ])
     ],
     1
@@ -70251,8 +70268,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/lars/Documents/persoonlijk/code/open-remote-maps/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/lars/Documents/persoonlijk/code/open-remote-maps/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/daveyvandenbogaard/Documents/Minor OI/Code/open-remote-geclusterde-data/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/daveyvandenbogaard/Documents/Minor OI/Code/open-remote-geclusterde-data/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

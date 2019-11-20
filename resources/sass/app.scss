@@ -12,6 +12,7 @@
   -webkit-transition: .2s;
   transition: opacity .2s;
   border-radius: 25px;
+
 }
 
 .slider:hover {
@@ -21,11 +22,31 @@
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 25px;
-  height: 25px;
-  background: #4CAF50;
+  width: 15px;
+  height: 15px;
+  background: #26A0FC;
   border-radius: 20px;
   cursor: pointer;
+}
+
+.range-labels {
+  padding: 0;
+  margin-top: 8px;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  li {
+    position: relative;
+    float: left;
+    text-align: center;
+    color: #b2b2b2;
+    font-size: 14px;
+    cursor: pointer;
+    transform: rotate(-45deg);
+    flex-grow: 1;
+  }
 }
 
 body {

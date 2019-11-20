@@ -7,9 +7,13 @@
                     min="1"
                     max="24"
                     value="0"
+                    step="1"
                     v-model="range"
                     class="slider m-0"
                     id="slider">
+            <ul class="range-labels">
+                <li v-for="index in 24" v-bind:key="index - 1">{{index - 1 + ':00'}}</li>
+            </ul>
         </div>
     </div>
 </template>
@@ -74,6 +78,7 @@
 
         watch: {
             range: function() {
+                console.log(this.range)
                 Bus.$emit('reload-map', this.range);
             }
         }
