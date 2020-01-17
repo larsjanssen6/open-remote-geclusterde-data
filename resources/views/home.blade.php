@@ -14,9 +14,9 @@
 <body class="font-sans">
 <div id="app">
     <div class="flex h-screen w-full">
-        <div class="flex items-center justify-center bg-blue-900 text-white w-32">
+        <!-- <div class="flex items-center justify-center bg-blue-900 text-white w-32">
             <h2 class="text-2xl">MENU</h2>
-        </div>
+        </div> -->
 
         <div class="flex flex-col w-full">
 

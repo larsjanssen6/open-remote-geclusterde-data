@@ -8,12 +8,22 @@
 require('./bootstrap');
 import store from './store'
 import VueApexCharts from "vue-apexcharts";
+import VueSocketIO from 'vue-socket.io';
 
 window.Vue = require('vue');
 
 window.Bus = new Vue();
 
 Vue.use(VueApexCharts);
+Vue.use(new VueSocketIO({
+    debug: true,
+    connection: "http://localhost:3000",
+    vuex: {
+        store,
+        actionPrefix: 'SOCKET_',
+        mutationPrefix: 'SOCKET_'
+    },
+}))
 
 Vue.component('apexchart', VueApexCharts)
 

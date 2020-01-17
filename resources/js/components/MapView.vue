@@ -49,6 +49,41 @@
             };
         },
 
+        sockets: {
+           connect: function () {
+            console.log('socket connected')
+            
+            },
+            newData: function (data) {
+                let newPoint = {
+                   type: "Feature",
+                   geometry: {
+                       type: "Point",
+                       coordinates: [
+                           data.longitude,
+                           data.latitude
+                       ]
+                   },
+                   properties: {
+                        aangemaakt: new Date(),
+                        nummer: "990545905",
+                        onderwerp:"6.1 Illegale stort",
+                        gebied: "1-Centrum",
+                        geo_point_2d:[
+                            data.longitude,
+                           data.latitude
+                        ],
+                        buurt: "BU07721112",
+                        gewijzigd: "2019-01-29T11:27:00+01:00",
+                        locatie: "Grote Berg 33",
+                        locatie_ter_hoogte_van: "Grote Berg 33"
+                   }
+                }
+                this.locations.features.push(newPoint);
+                this.addMarkers()
+            } 
+        },
+
         mounted() {
             mapboxgl.accessToken =
                 'pk.eyJ1Ijoic3RlZmFuZ2llcyIsImEiOiJjazBlemc3MmkwZTNkM25tcHIwZW9nOGJvIn0.TuLSLNJrtb247NH3MXWVJA';
