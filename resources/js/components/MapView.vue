@@ -1,7 +1,13 @@
-<template>
+ <template>
     <div class="relative w-full h-full">
         <div class="absolute w-full h-full">
             <div class="rounded w-full h-full" id="map"></div>
+        </div>
+
+        <div class="text-white absolute top-0 left-0 mt-32 ml-8 p-4 rounded"
+             v-if="timeInFuture"
+             style="background: #F6E835;">
+            Let op dit is voorspelde data
         </div>
 
         <div class="absolute mt-4 w-full mx-0">
@@ -18,6 +24,7 @@
     export default {
         data() {
             return {
+                timeInFuture: false,
                 map: null,
                 locations: [],
                 allLocations: {features: [], type: "FeatureCollection"},
@@ -25,12 +32,19 @@
                 markers: [],
                 clustersGeojson: {},
                 clusterIndex: null,
-                colors: [
+                pastColors: [
                     '#ffb3b3',
                     '#ff4d4d',
                     '#ff0000',
                     '#b30000',
                     '#660000'
+                ],
+                futureColors: [
+                    '#F6E835',
+                    '#F4E409',
+                    '#C8BB08',
+                    '#9C9206',
+                    '#6F6805'
                 ]
             };
         },
@@ -66,6 +80,14 @@
 
         methods: {
             reloadMap(range) {
+                if(range > moment().hours()) {
+                    this.timeInFuture = true;
+                }
+
+                else {
+                    this.timeInFuture = false;
+                }
+
                 this.allLocations = {features: [], type: "FeatureCollection"};
 
                 if(this.locations.features) {
@@ -73,7 +95,6 @@
                         let time = moment(f.properties.aangemaakt).hours();
 
                         if (time == range) {
-                            console.log('match');
                             this.allLocations.features.push(f);
                         }
                     });
@@ -156,7 +177,7 @@
                         $innerBackground.className = 'absolute w-full h-full';
                         const color = this.bindColor((feature.properties.point_count / this.allLocations.features.length).toFixed(2))
                         if (color === undefined) {
-                            $innerBackground.style.backgroundColor = this.colors[4];
+                            $innerBackground.style.backgroundColor = this.pastColors[4];
                         } else {
                             $innerBackground.style.backgroundColor = color;
                         }
@@ -177,7 +198,9 @@
                         $feature = document.createElement('div');
                         $feature.className =
                             'flex items-center justify-center w-10 h-10 rounded-full text-center text-lg text-white font-bold bg-cover cursor-pointer bg-center';
-                        $feature.style.backgroundImage = `url(person.svg)`;
+                        // // $feature.style.backgroundImage = `url(person.svg)`;
+                        $feature.style.backgroundImage = `url(arrow.svg)`;
+                        $feature.style.transform = `rotate(50deg)`;
                         this.bindClickEvent($feature, feature);
 
                         this.markers.push(
@@ -233,19 +256,36 @@
             },
 
             bindColor(index) {
-                switch (true) {
-                    case (index < 0.2):
-                        return this.colors[0];
-                    case (index < 0.4):
-                        return this.colors[1];
-                    case (index < 0.6):
-                        return this.colors[2];
-                    case (index < 0.8):
-                        return this.colors[3];
-                    case (index < 1.0):
-                        return this.colors[4];
+                if(this.timeInFuture) {
+                    switch (true) {
+                        case (index < 0.2):
+                            return this.futureColors[0];
+                        case (index < 0.4):
+                            return this.futureColors[1];
+                        case (index < 0.6):
+                            return this.futureColors[2];
+                        case (index < 0.8):
+                            return this.futureColors[3];
+                        case (index < 1.0):
+                            return this.futureColors[4];
+                    }
+                }
+
+                else {
+                    switch (true) {
+                        case (index < 0.2):
+                            return this.pastColors[0];
+                        case (index < 0.4):
+                            return this.pastColors[1];
+                        case (index < 0.6):
+                            return this.pastColors[2];
+                        case (index < 0.8):
+                            return this.pastColors[3];
+                        case (index < 1.0):
+                            return this.pastColors[4];
+                    }
                 }
             }
-        },
+        }
     };
 </script>

@@ -52,3 +52,19 @@
 body {
     margin: 0;
 }
+
+.vue-slider-mark-step {
+  display: none!important;
+}
+
+.vue-slider {
+  height: 12px!important;
+}
+
+.vue-slider-process {
+  background-color: #B100D9!important;
+}
+
+.vue-slider-dot-handle {
+  border: 2px solid black !important;
+}
