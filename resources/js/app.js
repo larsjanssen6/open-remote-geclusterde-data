@@ -17,7 +17,7 @@ window.Bus = new Vue();
 Vue.use(VueApexCharts);
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: "http://localhost:3000",
+    connection: "https://openremote-server.herokuapp.com",
     vuex: {
         store,
         actionPrefix: 'SOCKET_',
